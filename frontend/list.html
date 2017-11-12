@@ -1,0 +1,11 @@
+{% if URLs_List %}
+<ul>
+    {% for URL in URLs_List %}
+    <li>
+        <a href="/scrapped/{{ URL.title }}/">{{ URL.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No URLs were scrapped</p>
+{% endif %}

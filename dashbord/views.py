@@ -5,8 +5,8 @@ from django.conf.urls import include
 
 # for scrapping
 import requests
-#import python-lxml
-
+import lxml
+#import cssselect # import error 
 
 #db table
 from .models import Dashbord
@@ -18,5 +18,10 @@ def scraped(request):
     return HttpResponse("scraped end point with one argumant :( " )
 
 def runScrapper(request):
-    requests()
-    return HttpResponse("scraped end point with one argumant :( " )
+    res = requests.get("http://www.mathhelp.com/intermediate-algebra-help/?utm_campaign=purplemath&utm_source=_mh_cima&utm_medium=coursez")
+    # print(res.text)
+    treeObj = lxml.html.HTML(res.text)
+    print(treeObj)
+    title_elem = tree.xpath('//title')[0]
+    print("..................................................................................")
+    return HttpResponse("run scrapper end point :( " )

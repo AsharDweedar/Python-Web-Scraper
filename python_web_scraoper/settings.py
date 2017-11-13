@@ -75,14 +75,26 @@ WSGI_APPLICATION = 'python_web_scraoper.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
+''' 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'scrapper',
+        'USER': 'q2lenr56rkart2k5',
+        'PASSWORD': 'mxw7in7ddys3546h',
+        'HOST': 'bfjrxdpxrza9qllq.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        'PORT': '3306',
+    }
+}
+ '''
+ 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+ 
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

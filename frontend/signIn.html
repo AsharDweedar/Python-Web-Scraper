@@ -1,7 +1,10 @@
 <div>
     <form action="post" method="post" >
+         {% csrf_token %}
         <input type="text" name="name" placeholder="enter your name" />
         <input type="password" name="password" placeholder="enter your password" />
         <button type="submin" method="post" onclick="() => console.log('trying to submit')" >submit</button>
     </form>
 </div>
+
+<!-- agent inside the header  -->

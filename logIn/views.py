@@ -27,7 +27,7 @@ def submit(request):
 
 def signup(request):
     data = request._get_request()
-
+    print('inside signup')
     print(dir(data))
     print('new_name')
     print(data.get('new_name'))

@@ -24,14 +24,13 @@ def runScrapper(request):
     treeObj = lxml.html.fromstring(res.text)
     container = treeObj.xpath("//div[@id='mh_course_menu']")
     chapters = container[0].xpath('.//div')
-    for unitsContainer in [chapters[0]]:
+    for unitsContainer in chapters:
         unitsDiv = unitsContainer.xpath('.//div')
         if (len(unitsDiv) > 0):
             unitsDiv = unitsDiv[0]
-            print('unitsDiv text: ')
             units = unitsDiv.xpath('.//p')
             print('%s units : ' % len(units))
-            for unit in [units[0]]:
+            for unit in units:
                 link = "http://www.mathhelp.com/{}".format(unit.xpath('.//a/@href')[0])
                 print('link : {}'.format(link))
                 scrappURL(link)                
@@ -46,15 +45,9 @@ def scrappURL(link):
     title = etree.tostring(title,with_tail=False)[4:-5]
     content = etree.tostring(content,with_tail=False)[3:-4]
     print(title)
-    print(type(title))
-    obj = {
-        "title" : title,
-        "content" : content
-    }
-    print(obj)
-    row = Dashbord.objects.create(title=title,content=content)
-    # print('///////////////')
-    # row.save()          
+    if not Dashbord.objects.filter(title=title):
+        print('%s saved' %title)
+        row = Dashbord.objects.create(title=title,content=content)
 
 
     

@@ -5,7 +5,7 @@ from django.conf.urls import include
 
 # for scrapping
 import requests
-import lxml
+import lxml.html
 #import cssselect # import error 
 
 #db table
@@ -20,8 +20,10 @@ def scraped(request):
 def runScrapper(request):
     res = requests.get("http://www.mathhelp.com/intermediate-algebra-help/?utm_campaign=purplemath&utm_source=_mh_cima&utm_medium=coursez")
     # print(res.text)
-    treeObj = lxml.html.HTML(res.text)
+    # treeObj = lxml.html.HTML(res.text)
+    treeObj = lxml.html.fromstring(res.text)
+    #someTag = tree.xpath('//title')[0] # title as example => it doesn't work 
     print(treeObj)
-    title_elem = tree.xpath('//title')[0]
+    # title_elem = tree.xpath('//title')[0]
     print("..................................................................................")
     return HttpResponse("run scrapper end point :( " )

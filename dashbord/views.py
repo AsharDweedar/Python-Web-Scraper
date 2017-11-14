@@ -6,6 +6,7 @@ from django.conf.urls import include
 # for scrapping
 import requests
 import lxml.html
+from lxml.html import etree
 #import cssselect # import error 
 
 #db table
@@ -19,15 +20,41 @@ def scraped(request):
 
 def runScrapper(request):
     res = requests.get("http://www.mathhelp.com/intermediate-algebra-help/?utm_campaign=purplemath&utm_source=_mh_cima&utm_medium=coursez")
-    # print(res.text)
-    # treeObj = lxml.html.HTML(res.text)
+
     treeObj = lxml.html.fromstring(res.text)
     container = treeObj.xpath("//div[@id='mh_course_menu']")
-    print("container : ")
-    print(container[0])
-    # print(container[0].text_content())
-    sub = container[0].xpath('.//div') #[@class="et_pb_module"]
-    print("container children : ")
-    print(sub)
+    chapters = container[0].xpath('.//div')
+    for unitsContainer in [chapters[0]]:
+        unitsDiv = unitsContainer.xpath('.//div')
+        if (len(unitsDiv) > 0):
+            unitsDiv = unitsDiv[0]
+            print('unitsDiv text: ')
+            units = unitsDiv.xpath('.//p')
+            print('%s units : ' % len(units))
+            for unit in [units[0]]:
+                link = "http://www.mathhelp.com/{}".format(unit.xpath('.//a/@href')[0])
+                print('link : {}'.format(link))
+                scrappURL(link)                
     print("....................................................................")
-    return HttpResponse("run scrapper end point :( " )
+    return HttpResponse("run scrapper end point , done scrapping " )
+
+def scrappURL(link):
+    all = requests.get(link)
+    treeObj = lxml.html.fromstring(all.text)
+    title = treeObj.xpath("//div[@id='mh_lesson_page']")[0].xpath('.//h1')[0]
+    content = treeObj.xpath("//div[@id='mh_lesson_page']")[0].xpath('.//p')[0]
+    title = etree.tostring(title,with_tail=False)[4:-5]
+    content = etree.tostring(content,with_tail=False)[3:-4]
+    print(title)
+    print(type(title))
+    obj = {
+        "title" : title,
+        "content" : content
+    }
+    print(obj)
+    row = Dashbord.objects.create(title=title,content=content)
+    # print('///////////////')
+    # row.save()          
+
+
+    

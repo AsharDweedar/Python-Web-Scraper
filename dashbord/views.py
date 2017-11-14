@@ -22,8 +22,12 @@ def runScrapper(request):
     # print(res.text)
     # treeObj = lxml.html.HTML(res.text)
     treeObj = lxml.html.fromstring(res.text)
-    someTag = treeObj.xpath("//div[@id='mh_course_menu']") # title as example => it doesn't work 
-    print("someTag : ")
-    print(someTag.text.strip())
+    container = treeObj.xpath("//div[@id='mh_course_menu']")
+    print("container : ")
+    print(container[0])
+    # print(container[0].text_content())
+    sub = container[0].xpath('.//div') #[@class="et_pb_module"]
+    print("container children : ")
+    print(sub)
     print("....................................................................")
     return HttpResponse("run scrapper end point :( " )

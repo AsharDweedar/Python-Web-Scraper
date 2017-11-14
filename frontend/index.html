@@ -37,6 +37,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="cont">
+        <a href="/dashbord/runScrapper" >Run Scrapper</a>
+        {% if URLs_List.message %}
+            <p>scrapper was run successfully </p>
+        {% endif %}
         <h1>click to toggle dashbord</h1>
         <button
           onClick={() => {
@@ -49,9 +53,23 @@ class App extends React.Component {
           get links from dashbord
         </button>
         <ul>
-          scraped URLs :
-          {this.state.showDashBord &&
-            this.state.URLs.map(scraped => <li>{scraped.title}</li>)}
+            {this.state.showDashBord &&
+                <div>
+                    <h2> scraped URLs : </h2>
+                    {% if URLs_List %}
+                    <ul>
+                        {% for URL in URLs_List %}
+                        <li>
+                            <a href="{{ URL.url }}/">{{ URL.title }}</a>
+                            <p>{{ URL.content }}</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No URLs were scrapped</p>
+                    {% endif %}
+                </div>
+            }
         </ul>
       </div>
     );

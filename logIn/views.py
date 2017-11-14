@@ -8,8 +8,6 @@ import lxml.html
 from .models import Users
 from dashbord.models import Dashbord
 
-# index = include('../frontend/index.html') 
-
 def submit(request):
     data = request._get_request()
     print(data)
@@ -23,18 +21,10 @@ def submit(request):
 
     URLs_List = Dashbord.objects.all()
     print(len(URLs_List))
-    # URLs_List = [{"title": "title1"},{"title": "title2"},{"title": "title3"},] #Dashbord.objects
     context = {
         'URLs_List': URLs_List,
     }
-    h = "hi"
-    # return HttpResponse( home ) #include('../frontend/index.html'))
-    # page = requests.get('../frontend/index.html')
-    # ind = str(index)
-    # return render(ind, content_type='text/pain')
-    # return HttpResponse(page, content_type='text/pain')
     return render(request, 'index.html',context)
-    # return render(request, 'list.html',context)
 
 def signup(request):
     data = request._get_request()

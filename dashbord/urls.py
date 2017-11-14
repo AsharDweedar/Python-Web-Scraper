@@ -3,8 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^index/', views.index, name='index'),
-    url(r'^scraped/', views.scraped, name='scraped'),
     url(r'^runScrapper/', views.runScrapper, name='scraped'),
 ]
     # url(r'(?P<title>[a-z])/scraped$', views.scraped, name='scraped'),

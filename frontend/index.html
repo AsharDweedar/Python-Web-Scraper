@@ -20,11 +20,14 @@
 </head>
 <body>
     <div id="App">
+        hello world, this should disapear after loading 
     </div> 
-
-    <!-- my javascript file -->
-    <!-- <script type="text/babel" src="./index.jsx"></script>  -->
-    <script>class App extends React.Component {
+    
+    <!-- my javascript script -->
+    <script>
+        window.onload = function () {
+            console.log('before render')
+        class App extends React.Component {
             constructor(props) {
                 super(props);
                 this.state = {
@@ -42,11 +45,10 @@
                         });
                     }}>
                         get links from dashbord
-        </button>
+                    </button>
                     <ul>
-                        {" "}
                         scraped URLs :
-          {this.state.showDashBord && this.state.URLs.map(scraped => (
+                        {this.state.showDashBord && this.state.URLs.map(scraped => (
                             <li>{scraped.title}</li>
                         ))}
                     </ul>
@@ -55,13 +57,12 @@
 
         }
 
-        console.log('before render')
-        ReactDOM.render(<App />, document.getElementById("App"));
+        ReactDOM.render(<App />, document.getElementById("App"));}
 
 
 //  () => {
 //             $.ajax({
-//               url: "http://127.0.0.1:3030/allScraped",
+//               url: "/allScraped",
 //               type: "GET",
 //               success: data => {
   //                 ReactDOM.render(<dashbordList list={data} />, document.getElementById("container"));

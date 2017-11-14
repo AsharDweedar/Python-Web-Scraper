@@ -12,12 +12,6 @@ from lxml.html import etree
 #db table
 from .models import Dashbord
 
-def index(request):
-    return render(request, "dashbord.html", {something : "hi there"})
-
-def scraped(request):
-    return HttpResponse("scraped end point with one argumant :( " )
-
 def runScrapper(request):
     res = requests.get("http://www.mathhelp.com/intermediate-algebra-help/?utm_campaign=purplemath&utm_source=_mh_cima&utm_medium=coursez")
 
@@ -47,7 +41,7 @@ def scrappURL(link):
     print(title)
     if not Dashbord.objects.filter(title=title):
         print('%s saved' %title)
-        row = Dashbord.objects.create(title=title,content=content)
+        row = Dashbord.objects.create(title=title,content=content,url=link)
 
 
     

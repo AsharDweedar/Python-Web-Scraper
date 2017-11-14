@@ -1,8 +1,10 @@
+<a href="/dashbord/runScrapper" >Run Scrapper</a>
 {% if URLs_List %}
 <ul>
     {% for URL in URLs_List %}
     <li>
-        <a href="/scrapped/{{ URL.title }}/">{{ URL.title }}</a>
+        <a href="{{ URL.url }}/">{{ URL.title }}</a>
+        <p>{{ URL.content }}</p>
     </li>
     {% endfor %}
 </ul>

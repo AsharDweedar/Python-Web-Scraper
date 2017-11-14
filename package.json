@@ -1,0 +1,23 @@
+{
+  "name": "python-web-scraoper",
+  "version": "1.0.0",
+  "description": "final task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AsharDweedar/Python-Web-Scraper.git"
+  },
+  "author": "AsharDweedar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AsharDweedar/Python-Web-Scraper/issues"
+  },
+  "homepage": "https://github.com/AsharDweedar/Python-Web-Scraper#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}
